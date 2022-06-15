@@ -73,7 +73,7 @@ class Object {
 
 setInterval(function () {
   objectsArray.push(new Object(getRandomInt(0, document.body.clientWidth - 70), getRandomInt(100, document.body.clientHeight - 70)));
-}, 30);
+}, 3000);
 
 // click trigger
 
