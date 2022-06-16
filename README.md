@@ -20,30 +20,20 @@ Petit jeu ayant pour principe de venir cliquer sur les objets qui apparaissent �
 
 #### Quelles actions va effectuer l'utilisateur ?
 
-
-1ère phrase
-—————————
-- appuyer sur les différentes touches de clavier
-  - faire des fautes de frappe
-  - réussir
-- constater le temps que ça a pris d'écrire la phrase (première fois)
-
-2ème phase
-—————————
-- constater que les touches de clavier ne sont absolument plus dans le même ordre
-  - chercher une touche
-    - la trouver rapidement
-    - mettre longtemps à la trouver
-      - réappuyer sur la même
-      - en chercher une autre
-      - faire revenir son doigt machinalement, sans faire exprès, vers l'emplacement de la touche cherchée sur un clavier azerty
-
+- déplacer la souris
+  - ne pas comprendre quel logique suit le curseur pour se déplacer
+  - comprendre que le sens de déplacement est inversé
+    - essayer de venir cliquer sur un objet
+      - y arriver parce qu'utilisateur commence à s'habituer
+      - ne pas y arriver
+    - cliquer presque machinalement sur un objet parce que l'utilisateur commence à assimiler le fait que le sens de déplacemet du curseur soit inversé horizontalement, mais pas verticalement
 
 #### Quelles ***émotions*** va ressentir l'utilisateur ?
 
-- de la ***confiance***, de l'***aisance*** sur la première phase de l'interface, ou l'utilisateur n'éprouve aucune difficulté
-- de la ***surprise*** au constat de l'agencement aléatoire du clavier
-- de l'***incompréhension*** face à la logique de disposition des touches (parce qu'il n'y aucune logique)
-- de la ***frustration*** à chaque fois que l'utilisateur ne trouve pas une touche
-- de l'***étonnement*** en voyant le rapport temporel si différent entre les deux mesures, pour la même phrase
--
+- de l'***incompréhension*** quand le curseur ne va pas suivre le déplacement logique de la souris
+- de la ***surprise*** / de la ***satisfaction*** quand il va comprendre que les déplacements sont inversés
+- de la ***frustration*** quand il va avoir du mal à cliquer sur le premier objet
+- de la ***pression*** en voyant le temps restant diminuer
+- de la ***confiance*** quand il va commencer à s'habituer aux déplacement du curseur
+- de la ***satisfaction*** si il arrive à gagner
+- de la ***frustration*** si il finit par perdre
