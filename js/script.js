@@ -43,21 +43,25 @@ const playableArea = document.getElementById('playable-area');
 
 let objectsCount = 0;
 
-
 class Object {
-  constructor(x, y) {
+
+  constructor(x, y, id) {
     this.x = x;
     this.y = y;
+    this.id = id;
     this.backgroundColor = "green";
 
-    let object = document.createElement('div');
+    var object = document.createElement('div');
     object.classList.add('pointThis');
+    object.id = "asteroid" + id;
+
     object.style.left = this.x + "px";
     object.style.top = this.y + "px";
 
-    playableArea.appendChild(object);
 
+    playableArea.appendChild(object);
     this.object = object;
+
   }
 
   detectClick(){
@@ -66,14 +70,38 @@ class Object {
     // }
   }
 
+  update(){
+    let asteroid = document.getElementById('asteroid' + this.id);
+    this.x+=0.1;
+    this.y+=0.1;
+    asteroid.style.left = this.x + "px";
+    asteroid.style.top = this.y + "px";
+    console.log(this.x);
+  }
+
+}
+
+function  animate(){
+  console.log('executed once');
+  for (var i = 0; i < objectsArray.length; i++) {
+    objectsArray[i].update();
+  }
+  requestAnimationFrame(animate)
+  
 }
 
 
 // creation des objets
 
 setInterval(function () {
-  objectsArray.push(new Object(getRandomInt(0, document.body.clientWidth - 70), getRandomInt(100, document.body.clientHeight - 70)));
+
+  objectsArray.push(new Object(getRandomInt(0, document.body.clientWidth - 70), getRandomInt(100, document.body.clientHeight - 70), objectsCount));
+  requestAnimationFrame(animate)
+
+  objectsCount++;
 }, 3000);
+
+
 
 // click trigger
 
@@ -121,7 +149,6 @@ var timerCounting = setInterval(function () {
     }
 
 }, 100);
-
 
 
 console.log(objectsArray);
