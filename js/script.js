@@ -87,7 +87,7 @@ class Object {
 
   detectClick() {
     // if ( 25 > this.x - cursorX > -25 && 25 > this.y - cursorY > -25 ) {
-    console.log(this.id);
+    // console.log(this.id);
     let asteroidToDelete = document.getElementById('asteroid' + this.id);
     this.backgroundColor = "blue";
     asteroidToDelete.classList.add('displayNone');
@@ -104,7 +104,7 @@ class Object {
     var angle = Math.atan2(vectorX, vectorY);
     var degrees = 180 * angle / Math.PI;
     let finalAngle = (360 + Math.round(degrees)) % 360;
-    console.log(360 - finalAngle);
+    // console.log(360 - finalAngle);
 
     let asteroid = document.getElementById('asteroid' + this.id);
     this.x += 1 * vectorCoeff;
@@ -118,7 +118,6 @@ class Object {
       // DEFEAT
       cancelAnimationFrame(reqAnim);
       clearInterval(timerCounting);
-      clearInterval(createObjects);
       defeat = true;
 
       var tasperdu = document.createElement('h1')
@@ -144,18 +143,54 @@ function animate() {
 
 }
 
-// creation des objets
+// // creation des objets
 let objectsSpawnSpeed = 3000;
+//
 
-let createObjects = setInterval(function() {
+const generateObjects = () => {
+    objectsArray.push(new Object(getRandomInt(-250, document.body.clientWidth + 250), -100, objectsCount));
+    objectsCount++;
 
-  objectsArray.push(new Object(getRandomInt(-250, document.body.clientWidth + 250), -100, objectsCount));
+    if (objectsSpawnSpeed > 500) {
+      objectsSpawnSpeed -= 50;
+    }
 
-  objectsCount++;
-  objectsSpawnSpeed += 30;
-}, objectsSpawnSpeed);
+    console.log(objectsSpawnSpeed);
+}
+
+// let createObjects = setInterval(function() {
+//
+//   generateObjects();
+//
+// //
+// //   objectsArray.push(new Object(getRandomInt(-250, document.body.clientWidth + 250), -100, objectsCount));
+// //
+// //   objectsCount++;
+// //   objectsSpawnSpeed -= 100;
+// }, objectsSpawnSpeed);
+
+
+
+function startGeneratingObjects()
+{
+  if (defeat == false) {
+
+   setTimeout(function() {
+      // objectsSpawnSpeed -= 100;
+      generateObjects();
+      startGeneratingObjects();
+   }, objectsSpawnSpeed);
+ }
+   
+}
+
+startGeneratingObjects();
+
+
+
 
 reqAnim = requestAnimationFrame(animate)
+
 
 // click trigger
 
