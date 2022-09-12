@@ -57,6 +57,8 @@ main {
   /* background-color: green; */
   /* background-image: url("../assets/asteroid-animation.gif"); */
   background : url("../assets/asteroid-animation.gif") no-repeat center center / cover;
+  transform-origin: center;
+  z-index: 80;
 }
 
 
@@ -100,4 +102,21 @@ main {
 
 .displayNone {
   display: none !important;
+}
+
+#earth {
+  transform-origin: 50%;
+  width: 250px;
+  height: 250Px;
+
+  background-color: lime;
+  border-radius: 50%;
+
+  position: absolute;
+  left: calc(50% - 125px);
+  top: calc(90% - 125px);
+
+  z-index: 90;
+  background : url("../assets/earth.png") no-repeat center center / cover;
+  z-index: 50;
 }
