@@ -39,9 +39,11 @@ main {
 .pointThis {
   position:   absolute;
   width: 30px;
-  height: 30px;
+  height: 60px;
 
-  background-color: green;
+  /* background-color: green; */
+  /* background-image: url("../assets/asteroid-animation.gif"); */
+  background : url("../assets/asteroid-animation.gif") no-repeat center center / cover;
 }
 
 #timer {

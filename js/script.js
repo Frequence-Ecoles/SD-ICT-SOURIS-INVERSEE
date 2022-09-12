@@ -74,8 +74,8 @@ class Object {
 
   update(){
     let asteroid = document.getElementById('asteroid' + this.id);
-    this.x+=0.1;
-    this.y+=0.1;
+    // this.x+=0.1;
+    this.y+=0.5;
     asteroid.style.left = this.x + "px";
     asteroid.style.top = this.y + "px";
     console.log(this.x);
@@ -97,7 +97,7 @@ function  animate(){
 
 let createObjects = setInterval(function () {
 
-  objectsArray.push(new Object(getRandomInt(0, document.body.clientWidth - 70), getRandomInt(100, document.body.clientHeight - 70), objectsCount));
+  objectsArray.push(new Object(getRandomInt(0, document.body.clientWidth - 70), getRandomInt(100, document.body.clientHeight/3), objectsCount));
 
   objectsCount++;
 }, 3000);
