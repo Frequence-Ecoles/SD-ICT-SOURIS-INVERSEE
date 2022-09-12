@@ -42,6 +42,8 @@ const playableArea = document.getElementById('playable-area');
 // }, 1000);
 
 let objectsCount = 0;
+let reqAnim;
+
 
 class Object {
 
@@ -86,21 +88,21 @@ function  animate(){
   for (var i = 0; i < objectsArray.length; i++) {
     objectsArray[i].update();
   }
-  requestAnimationFrame(animate)
-  
+  reqAnim = requestAnimationFrame(animate)
+
 }
 
 
 // creation des objets
 
-setInterval(function () {
+let createObjects = setInterval(function () {
 
   objectsArray.push(new Object(getRandomInt(0, document.body.clientWidth - 70), getRandomInt(100, document.body.clientHeight - 70), objectsCount));
-  requestAnimationFrame(animate)
 
   objectsCount++;
 }, 3000);
 
+reqAnim = requestAnimationFrame(animate)
 
 
 // click trigger
@@ -118,6 +120,11 @@ document.addEventListener('click', function(){
       winCount++;
 
       if (winCount == 10) {
+        // stop animation, timer and object creation
+        cancelAnimationFrame(reqAnim);
+        clearInterval(timerCounting);
+        clearInterval(createObjects);
+
         var tasgagne = document.createElement('h1')
         tasgagne.innerHTML = "C'EST GAGNÉ !";
         tasgagne.classList.add('tasgagne');
@@ -139,9 +146,12 @@ var timerCounting = setInterval(function () {
     timer.innerHTML = "Temps restant : " + time/1000 + "s";
 
     if (time <=  0) {
+      // stop animation, timer and object creation
+
+      cancelAnimationFrame(reqAnim);
       console.log
       clearInterval(timerCounting);
-
+      clearInterval(createObjects);
       var tasperdu = document.createElement('h1')
       tasperdu.innerHTML = "PERDU !";
       tasperdu.classList.add('tasperdu');
