@@ -2,7 +2,12 @@
 
 
 
-@import url('https://assets.gumroad.com/packs/static/19db990205089207b039.woff2');
+/* @import url('https://assets.gumroad.com/packs/static/19db990205089207b039.woff2'); */
+
+:root {
+  --sd-darkblue : #20124D;
+  --sd-red : #E6354D;
+}
 
 * {
   cursor: none;
@@ -37,6 +42,7 @@ main {
 
   top: 0;
   left: 0;
+  z-index: 100;
 }
 
 .targeted {
@@ -56,18 +62,18 @@ main {
 
 #timer {
   margin: 20px;
-  font-family: sans-serif;
-  background-color: black;
+  font-family: 'IBM Plex Mono', monospace;
+  /* background-color: black; */
   color: white;
-
-  font-size: 4rem;
+  font-size: 2rem;
+  color: var(--sd-red);
 }
 
 .tasperdu {
   position: absolute;
   font-size: 8rem;
   margin: 100px;
-  font-family: sans-serif;
+  font-family: 'IBM Plex Mono', monospace;
 
   background-color: black;
   color: white;
@@ -77,7 +83,7 @@ main {
   position: absolute;
   font-size: 8rem;
   margin: 100px;
-  font-family: sans-serif;
+  font-family: 'IBM Plex Mono', monospace;
 
   background-color: black;
   color: white;
@@ -88,4 +94,10 @@ main {
   height: 100px;
   width: 100px;
   background : url("../assets/explosion.gif") no-repeat center center / cover;
+  z-index: 95;
+
+}
+
+.displayNone {
+  display: none !important;
 }

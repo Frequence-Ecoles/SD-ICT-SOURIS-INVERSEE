@@ -8,12 +8,15 @@ let objectsArray = [];
 let asteroidX = 40;
 let asteroidY = 80;
 
+asteroidVelocity = 1;
+velocityMultiplication = asteroidVelocity/10;
+
 const mainContainer = document.getElementById('mainContainer');
 
 
 // inverted cursor move
 
-console.log(document.clientWidth);
+// console.log(document.clientWidth);
 document.addEventListener("mousemove", function(e) {
 
   cursorX = document.body.clientWidth - e.pageX;
@@ -71,25 +74,26 @@ class Object {
 
   detectClick(){
     // if ( 25 > this.x - cursorX > -25 && 25 > this.y - cursorY > -25 ) {
+      console.log(this.id);
       let asteroidToDelete = document.getElementById('asteroid' + this.id);
       this.backgroundColor = "blue";
-      asteroidToDelete.remove();
+      asteroidToDelete.classList.add('displayNone');
     // }
   }
 
   update(){
     let asteroid = document.getElementById('asteroid' + this.id);
     // this.x+=0.1;
-    this.y+=0.5;
+    this.y += asteroidVelocity+velocityMultiplication;
     asteroid.style.left = this.x + "px";
     asteroid.style.top = this.y + "px";
-    console.log(this.x);
+    // console.log(this.x);
 
     if (asteroidX > this.x - cursorX && this.x - cursorX > -asteroidX
     && asteroidY > this.y - cursorY && this.y - cursorY > -asteroidY) {
-      asteroid.classList.add('targeted');
+      // asteroid.classList.add('targeted');
     } else {
-      asteroid.classList.remove('targeted');
+      // asteroid.classList.remove('targeted');
 
     }
 
@@ -98,7 +102,7 @@ class Object {
 }
 
 function  animate(){
-  console.log('executed once');
+  // console.log('executed once');
   for (var i = 0; i < objectsArray.length; i++) {
     objectsArray[i].update();
   }
@@ -139,8 +143,9 @@ document.addEventListener('click', function(){
     if (asteroidX > objectsArray[i].x - cursorX && objectsArray[i].x - cursorX > -asteroidX
     && asteroidY > objectsArray[i].y - cursorY && objectsArray[i].y - cursorY > -asteroidY) {
 
-      console.log(objectsArray[i].x - cursorX)
+      // console.log(objectsArray[i].x - cursorX)
       objectsArray[i].object.style.backgroundColor = "blue";
+      objectsArray[i].detectClick();
       time += addTime;
       winCount++;
 
@@ -168,7 +173,7 @@ const timer = document.getElementById('timer');
 var timerCounting = setInterval(function () {
     time -= 100;
 
-    timer.innerHTML = "Temps restant : " + time/1000 + "s";
+    // timer.innerHTML = "Temps restant : " + time/1000 + "s";
 
     if (time <=  0) {
       // stop animation, timer and object creation
@@ -186,4 +191,4 @@ var timerCounting = setInterval(function () {
 }, 100);
 
 
-console.log(objectsArray);
+// console.log(objectsArray);
