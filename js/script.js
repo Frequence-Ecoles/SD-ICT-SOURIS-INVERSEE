@@ -5,6 +5,9 @@ var time = 15000;
 var addTime = 2500;
 let objectsArray = [];
 
+let asteroidX = 40;
+let asteroidY = 80;
+
 const mainContainer = document.getElementById('mainContainer');
 
 
@@ -55,7 +58,7 @@ class Object {
 
     var object = document.createElement('div');
     object.classList.add('pointThis');
-    object.id = "asteroid" + id;
+    object.id = "asteroid" + this.id;
 
     object.style.left = this.x + "px";
     object.style.top = this.y + "px";
@@ -68,7 +71,9 @@ class Object {
 
   detectClick(){
     // if ( 25 > this.x - cursorX > -25 && 25 > this.y - cursorY > -25 ) {
+      let asteroidToDelete = document.getElementById('asteroid' + this.id);
       this.backgroundColor = "blue";
+      asteroidToDelete.remove();
     // }
   }
 
@@ -79,6 +84,15 @@ class Object {
     asteroid.style.left = this.x + "px";
     asteroid.style.top = this.y + "px";
     console.log(this.x);
+
+    if (asteroidX > this.x - cursorX && this.x - cursorX > -asteroidX
+    && asteroidY > this.y - cursorY && this.y - cursorY > -asteroidY) {
+      asteroid.classList.add('targeted');
+    } else {
+      asteroid.classList.remove('targeted');
+
+    }
+
   }
 
 }
@@ -110,9 +124,20 @@ reqAnim = requestAnimationFrame(animate)
 var winCount = 0;
 
 document.addEventListener('click', function(){
+  // generation of the explosion
+  let explosion = document.createElement('div');
+  explosion. classList.add('explosion');
+  explosion.style.left = cursorX - 25 + "px";
+  explosion.style.top = cursorY - 25 + "px";
+  mainContainer.appendChild(explosion);
+  window.setTimeout(function(){
+    explosion.remove();
+  }, 560);
+
+  // detection of matched asteroids
   for (var i = 0; i < objectsArray.length; i++) {
-    if (25 > objectsArray[i].x - cursorX && objectsArray[i].x - cursorX > -25
-    && 25 > objectsArray[i].y - cursorY && objectsArray[i].y - cursorY > -25) {
+    if (asteroidX > objectsArray[i].x - cursorX && objectsArray[i].x - cursorX > -asteroidX
+    && asteroidY > objectsArray[i].y - cursorY && objectsArray[i].y - cursorY > -asteroidY) {
 
       console.log(objectsArray[i].x - cursorX)
       objectsArray[i].object.style.backgroundColor = "blue";
