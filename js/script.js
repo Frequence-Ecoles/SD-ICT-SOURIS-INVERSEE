@@ -74,6 +74,7 @@ class Object {
     this.y = y;
     this.id = id;
     this.backgroundColor = "green";
+    this.alreadyClicked = false;
 
     var object = document.createElement('div');
     object.classList.add('pointThis');
@@ -88,12 +89,16 @@ class Object {
   }
 
   detectClick() {
-    // if ( 25 > this.x - cursorX > -25 && 25 > this.y - cursorY > -25 ) {
-    // console.log(this.id);
-    let asteroidToDelete = document.getElementById('asteroid' + this.id);
-    this.backgroundColor = "blue";
-    asteroidToDelete.classList.add('displayNone');
-    // }
+
+    if (!this.alreadyClicked) {
+      let asteroidToDelete = document.getElementById('asteroid' + this.id);
+      this.backgroundColor = "blue";
+      asteroidToDelete.classList.add('displayNone');
+      this.alreadyClicked = true;
+      winCount++;
+
+    }
+
   }
 
   update() {
@@ -137,42 +142,40 @@ function animate() {
 
 }
 
-// // creation des objets
+//  creation des objets
 let objectsSpawnSpeed = 3000;
 //
 
 const generateObjects = () => {
+
+  if (objectsCount < 30) {
     objectsArray.push(new Object(getRandomInt(-250, document.body.clientWidth + 250), -100, objectsCount));
     objectsCount++;
+  }
 
-    if (objectsSpawnSpeed > 500) {
-      objectsSpawnSpeed -= 50;
-    }
+  if (objectsSpawnSpeed > 500) {
+    objectsSpawnSpeed -= 75;
+  }
 
-    console.log(objectsSpawnSpeed);
+  console.log(objectsSpawnSpeed + "||" + objectsCount);
 }
 
 // settimeout acceleration
-function startGeneratingObjects()
-{
+function startGeneratingObjects() {
   if (defeat == false) {
 
-   setTimeout(function() {
+    setTimeout(function() {
       // objectsSpawnSpeed -= 100;
       generateObjects();
       startGeneratingObjects();
-   }, objectsSpawnSpeed);
- }
+    }, objectsSpawnSpeed);
+  }
 
 }
 
 startGeneratingObjects();
 
-
-
-
 reqAnim = requestAnimationFrame(animate)
-
 
 // click trigger
 
@@ -194,10 +197,9 @@ document.addEventListener('click', function() {
     if (asteroidX > objectsArray[i].x - cursorX && objectsArray[i].x - cursorX > -asteroidX && asteroidY > objectsArray[i].y - cursorY && objectsArray[i].y - cursorY > -asteroidY) {
 
       // console.log(objectsArray[i].x - cursorX)
-      objectsArray[i].object.style.backgroundColor = "blue";
+      // objectsArray[i].object.style.backgroundColor = "blue";
       objectsArray[i].detectClick();
       time += addTime;
-      winCount++;
 
       // maj display count of destroyed asteroids
       asteroidsDestroyedDisplay.firstElementChild.innerHTML = winCount;
@@ -215,28 +217,11 @@ document.addEventListener('click', function() {
 
 const timer = document.getElementById('timer');
 
-var timerCounting = setInterval(function() {
-  time -= 200;
-
-  // timer.innerHTML = "Temps restant : " + time/1000 + "s";
-
-  if (time <= 0) {
-    // stop animation, timer and object creation
-
-  }
-
-}, 100);
-
-// console.log(objectsArray);
-
-
 // END TAB display
 
 const endTab = document.getElementById('end-tab');
 const victoryEndText = document.getElementById('victory-end-text');
 const defeatEndText = document.getElementById('defeat-end-text');
-
-
 
 // DEFEAT
 const userDefeat = () => {
@@ -244,15 +229,8 @@ const userDefeat = () => {
   let earth = document.getElementById('earth');
   earth.style.background = ' url("../assets/destroyed-earth.png") no-repeat center center / cover';
 
-
   cancelAnimationFrame(reqAnim);
-  clearInterval(timerCounting);
   defeat = true;
-
-  // var tasperdu = document.createElement('h1')
-  // tasperdu.innerHTML = "Dommage, la Terre a été détruite !";
-  // tasperdu.classList.add('tasperdu');
-  // mainContainer.appendChild(tasperdu);
   endTab.classList.remove('displayNone')
   defeatEndText.classList.remove('displayNone')
 
@@ -261,14 +239,7 @@ const userDefeat = () => {
 // VICTORY
 const userVictory = () => {
   cancelAnimationFrame(reqAnim);
-  clearInterval(timerCounting);
   victory = true;
-
-  // var tasgagne = document.createElement('h1')
-  //   tasgagne.innerHTML = "Bravo c'est gagné !";
-  //   tasgagne.classList.add('tasgagne');
-  //   mainContainer.appendChild(tasgagne);
-
   endTab.classList.remove('displayNone')
   victoryEndText.classList.remove('displayNone')
 }
