@@ -192,6 +192,9 @@ main {
   color: var(--sd-red);
   line-height: 4.6rem;
   text-align: center;
+
+
+  z-index: 100;
 }
 
 #retry-button {
@@ -205,4 +208,6 @@ main {
   background-color: var(--sd-red);
   border-radius: 2rem;
   text-decoration: none;
+
+  z-index: 100;
 }

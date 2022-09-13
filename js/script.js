@@ -240,6 +240,11 @@ const defeatEndText = document.getElementById('defeat-end-text');
 
 // DEFEAT
 const userDefeat = () => {
+
+  let earth = document.getElementById('earth');
+  earth.style.background = ' url("../assets/destroyed-earth.png") no-repeat center center / cover';
+
+
   cancelAnimationFrame(reqAnim);
   clearInterval(timerCounting);
   defeat = true;
