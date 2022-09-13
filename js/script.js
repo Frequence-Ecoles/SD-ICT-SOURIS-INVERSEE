@@ -216,7 +216,7 @@ document.addEventListener('click', function() {
 const timer = document.getElementById('timer');
 
 var timerCounting = setInterval(function() {
-  time -= 100;
+  time -= 200;
 
   // timer.innerHTML = "Temps restant : " + time/1000 + "s";
 
@@ -229,17 +229,28 @@ var timerCounting = setInterval(function() {
 
 // console.log(objectsArray);
 
-// DEFEAT
 
+// END TAB display
+
+const endTab = document.getElementById('end-tab');
+const victoryEndText = document.getElementById('victory-end-text');
+const defeatEndText = document.getElementById('defeat-end-text');
+
+
+
+// DEFEAT
 const userDefeat = () => {
   cancelAnimationFrame(reqAnim);
   clearInterval(timerCounting);
   defeat = true;
 
-  var tasperdu = document.createElement('h1')
-  tasperdu.innerHTML = "PERDU !";
-  tasperdu.classList.add('tasperdu');
-  mainContainer.appendChild(tasperdu);
+  // var tasperdu = document.createElement('h1')
+  // tasperdu.innerHTML = "Dommage, la Terre a été détruite !";
+  // tasperdu.classList.add('tasperdu');
+  // mainContainer.appendChild(tasperdu);
+  endTab.classList.remove('displayNone')
+  defeatEndText.classList.remove('displayNone')
+
 }
 
 // VICTORY
@@ -248,8 +259,11 @@ const userVictory = () => {
   clearInterval(timerCounting);
   victory = true;
 
-  var tasgagne = document.createElement('h1')
-    tasgagne.innerHTML = "C'EST GAGNÉ !";
-    tasgagne.classList.add('tasgagne');
-    mainContainer.appendChild(tasgagne);
+  // var tasgagne = document.createElement('h1')
+  //   tasgagne.innerHTML = "Bravo c'est gagné !";
+  //   tasgagne.classList.add('tasgagne');
+  //   mainContainer.appendChild(tasgagne);
+
+  endTab.classList.remove('displayNone')
+  victoryEndText.classList.remove('displayNone')
 }
