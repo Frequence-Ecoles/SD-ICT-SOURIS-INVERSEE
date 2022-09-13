@@ -16,7 +16,9 @@ let earthRayon = 125;
 asteroidVelocity = 1;
 velocityMultiplication = asteroidVelocity / 10;
 let defeat = false;
+let victory = false;
 
+let asteroidsDestroyedDisplay = document.getElementById('destroyedAsteroids');
 
 const mainContainer = document.getElementById('mainContainer');
 
@@ -115,15 +117,7 @@ class Object {
 
     let distance = getDistanceBetweenElements(asteroid, document.getElementById('earth'));
     if (distance < 150) {
-      // DEFEAT
-      cancelAnimationFrame(reqAnim);
-      clearInterval(timerCounting);
-      defeat = true;
-
-      var tasperdu = document.createElement('h1')
-      tasperdu.innerHTML = "PERDU !";
-      tasperdu.classList.add('tasperdu');
-      mainContainer.appendChild(tasperdu);
+      userDefeat()
     }
 
   }
@@ -158,19 +152,7 @@ const generateObjects = () => {
     console.log(objectsSpawnSpeed);
 }
 
-// let createObjects = setInterval(function() {
-//
-//   generateObjects();
-//
-// //
-// //   objectsArray.push(new Object(getRandomInt(-250, document.body.clientWidth + 250), -100, objectsCount));
-// //
-// //   objectsCount++;
-// //   objectsSpawnSpeed -= 100;
-// }, objectsSpawnSpeed);
-
-
-
+// settimeout acceleration
 function startGeneratingObjects()
 {
   if (defeat == false) {
@@ -181,7 +163,7 @@ function startGeneratingObjects()
       startGeneratingObjects();
    }, objectsSpawnSpeed);
  }
-   
+
 }
 
 startGeneratingObjects();
@@ -216,18 +198,14 @@ document.addEventListener('click', function() {
       objectsArray[i].detectClick();
       time += addTime;
       winCount++;
+
+      // maj display count of destroyed asteroids
+      asteroidsDestroyedDisplay.firstElementChild.innerHTML = winCount;
+
       //
-      // if (winCount == 10) {
-      //    stop animation, timer and object creation
-      //   cancelAnimationFrame(reqAnim);
-      //   clearInterval(timerCounting);
-      //   clearInterval(createObjects);
-      //
-      //   var tasgagne = document.createElement('h1')
-      //   tasgagne.innerHTML = "C'EST GAGNÉ !";
-      //   tasgagne.classList.add('tasgagne');
-      //   mainContainer.appendChild(tasgagne);
-      // }
+      if (winCount == 30) {
+        userVictory()
+      }
 
     }
   }
@@ -250,3 +228,28 @@ var timerCounting = setInterval(function() {
 }, 100);
 
 // console.log(objectsArray);
+
+// DEFEAT
+
+const userDefeat = () => {
+  cancelAnimationFrame(reqAnim);
+  clearInterval(timerCounting);
+  defeat = true;
+
+  var tasperdu = document.createElement('h1')
+  tasperdu.innerHTML = "PERDU !";
+  tasperdu.classList.add('tasperdu');
+  mainContainer.appendChild(tasperdu);
+}
+
+// VICTORY
+const userVictory = () => {
+  cancelAnimationFrame(reqAnim);
+  clearInterval(timerCounting);
+  victory = true;
+
+  var tasgagne = document.createElement('h1')
+    tasgagne.innerHTML = "C'EST GAGNÉ !";
+    tasgagne.classList.add('tasgagne');
+    mainContainer.appendChild(tasgagne);
+}
