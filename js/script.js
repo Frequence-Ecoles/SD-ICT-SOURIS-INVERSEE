@@ -13,8 +13,7 @@ let earthX = document.body.clientWidth * 0.50;
 let earthY = document.body.clientHeight * 0.90;
 let earthRayon = 125;
 
-asteroidVelocity = 1;
-velocityMultiplication = asteroidVelocity / 10;
+let asteroidVelocity = 1;
 let defeat = false;
 let victory = false;
 
@@ -114,8 +113,8 @@ class Object {
     // console.log(360 - finalAngle);
 
     let asteroid = document.getElementById('asteroid' + this.id);
-    this.x += 1 * vectorCoeff;
-    this.y += 1;
+    this.x += 1 * vectorCoeff * asteroidVelocity;
+    this.y += 1 * asteroidVelocity;
     asteroid.style.left = this.x + "px";
     asteroid.style.top = this.y + "px";
     asteroid.style.transform = 'rotate(calc(360deg - ' + finalAngle + 'deg))';
@@ -168,6 +167,7 @@ function startGeneratingObjects() {
       // objectsSpawnSpeed -= 100;
       generateObjects();
       startGeneratingObjects();
+      asteroidVelocity+=0.01;
     }, objectsSpawnSpeed);
   }
 
